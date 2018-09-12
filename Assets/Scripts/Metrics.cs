@@ -31,6 +31,7 @@ public static class Metrics
 	//Object generation
 	public const int HashGridSize = 256;
 	public const float HashGridScale = 0.25f;
+	public const float WallHeight = 3f;
 
 	static readonly Vector3[] Corners = 
 	{

@@ -29,7 +29,7 @@ public class MapEditor : MonoBehaviour
 	enum EditMode
 	{Ignore = 0, Create = 1, Delete = 2}
 	
-	EditMode _editRiverMode, _editRoadMode;
+	EditMode _editRiverMode, _editRoadMode, _editWallMode;
 
 	bool _isDragActive;
 	Direction _dragDirection;
@@ -133,6 +133,11 @@ public class MapEditor : MonoBehaviour
 		{
 			cell.RemoveRoads();
 		}
+
+		if (_editWallMode != EditMode.Ignore)
+		{
+			cell.IsWalled = _editWallMode == EditMode.Create;
+		}
 		
 		else if (_isDragActive)
 		{
@@ -227,5 +232,11 @@ public class MapEditor : MonoBehaviour
 	public void SetUrbanizationLevel(float level)
 	{
 		_activeUrbanizationLevel = (int) level;
+	}
+
+	[UsedImplicitly]
+	public void SetWallMode(int mode)
+	{
+		_editWallMode = (EditMode) mode;
 	}
 }

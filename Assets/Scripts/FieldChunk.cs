@@ -9,7 +9,7 @@ public class FieldChunk : MonoBehaviour
 	[SerializeField]
 	Canvas _canvas;
 
-	public HexagonMesh terrain, rivers, roads, openWater, shoreWater, estuaries;
+	public HexagonMesh terrain, rivers, roads, openWater, shoreWater, estuaries, walls;
 
 	public TerrainObjectManager objectManager;
 
@@ -165,6 +165,8 @@ public class FieldChunk : MonoBehaviour
 		{
 			TriangulateEdgeStrip(edges1, edges2, cell.Color, neighbour.Color, cell.HasRoadAtDirection(direction));
 		}
+		
+		objectManager.AddWall(edges1, cell, edges2, neighbour);
 		//Corner triangles
 		var nextNeighbour = cell.GetNeighbour(direction.Next());
 		if (nextNeighbour != null && neighbour != null && direction <= Direction.East)
