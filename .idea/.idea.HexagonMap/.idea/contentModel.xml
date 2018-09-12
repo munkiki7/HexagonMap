@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Mixa\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Mixa\.Rider2018.2\system\resharper-host\Local\Transient\ReSharperHost\v182\SolutionCaches\_HexagonMap.-791532587.00" t="ExcludeRecursive" />
+    <e p="E:\Projects\HexagonMap" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="CameraManager.cs" t="Include" />
+          <e p="Cell.cs" t="Include" />
+          <e p="EdgeVertices.cs" t="Include" />
+          <e p="Editor" t="Include">
+            <e p="CoordinatesDrawer.cs" t="Include" />
+          </e>
+          <e p="Field.cs" t="Include" />
+          <e p="FieldChunk.cs" t="Include" />
+          <e p="HexagonCoordinates.cs" t="Include" />
+          <e p="HexagonDirections.cs" t="Include" />
+          <e p="HexagonEdgeType.cs" t="Include" />
+          <e p="HexagonMesh.cs" t="Include" />
+          <e p="ListPool.cs" t="Include" />
+          <e p="MapEditor.cs" t="Include" />
+          <e p="Metrics.cs" t="Include" />
+          <e p="PseudoRandom.cs" t="Include" />
+          <e p="TerrainObjectManager.cs" t="Include" />
+          <e p="TerrainObjectsCollection.cs" t="Include" />
+        </e>
+        <e p="Shaders" t="Include">
+          <e p="CellShader.shader" t="Include" />
+          <e p="EstuaryShader.shader" t="Include" />
+          <e p="OpenWaterShader.shader" t="Include" />
+          <e p="RiverShader.shader" t="Include" />
+          <e p="RoadShader.shader" t="Include" />
+          <e p="ShoreWaterShader.shader" t="Include" />
+        </e>
+      </e>
+      <e p="HexagonMap.sln" t="IncludeFlat" />
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
