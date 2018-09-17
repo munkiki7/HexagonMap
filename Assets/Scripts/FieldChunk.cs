@@ -263,6 +263,8 @@ public class FieldChunk : MonoBehaviour
 			terrain.AddTriangle(bottomVertex, leftVertex, rightVertex);
 			terrain.AddTriangleColor(bottomCell.Color, leftCell.Color, rightCell.Color);
 		}
+		
+		objectManager.AddWall(bottomVertex, bottomCell, leftVertex, leftCell, rightVertex, rightCell);
 	}
 
 	void TriangulateCornerTerraces(Vector3 bottomVertex, Cell bottomCell, Vector3 leftVertex, Cell leftCell,

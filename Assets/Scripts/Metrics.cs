@@ -32,6 +32,7 @@ public static class Metrics
 	public const int HashGridSize = 256;
 	public const float HashGridScale = 0.25f;
 	public const float WallHeight = 3f;
+	public const float WallThickness = 0.75f;
 
 	static readonly Vector3[] Corners = 
 	{
@@ -175,5 +176,14 @@ public static class Metrics
 	public static float[] GetHouseThresholds(int urbanizationLevel)
 	{
 		return HouseThesholds[urbanizationLevel - 1];
+	}
+
+	public static Vector3 WallThicknessOffset(Vector3 closeEdge, Vector3 farEdge)
+	{
+		Vector3 offset;
+		offset.x = farEdge.x - closeEdge.x;
+		offset.y = 0;
+		offset.z = farEdge.z - closeEdge.z;
+		return offset.normalized * (WallThickness * 0.5f);
 	}
 }

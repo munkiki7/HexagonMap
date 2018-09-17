@@ -81,18 +81,81 @@ public class TerrainObjectManager : MonoBehaviour
 		}
 	}
 
+	public void AddWall(Vector3 vertex1, Cell cell1, Vector3 vertex2, Cell cell2, Vector3 vertex3, Cell cell3)
+	{
+		if (cell1.IsWalled)
+		{
+			if (cell2.IsWalled)
+			{
+				if (!cell3.IsWalled)
+				{
+					AddWallSegment(vertex3, cell3, vertex1, cell1, vertex2, cell2);
+				}
+			}
+			else if (cell3.IsWalled)
+			{
+				AddWallSegment(vertex2, cell2, vertex3, cell3, vertex1, cell1);
+			}
+			else
+			{
+				AddWallSegment(vertex1, cell1, vertex2, cell2, vertex3, cell3);
+			}
+		}
+		else if (cell2.IsWalled)
+		{
+			if (cell3.IsWalled)
+			{
+				AddWallSegment(vertex1, cell1, vertex2, cell2, vertex3, cell3);
+			}
+			else
+			{
+				AddWallSegment(vertex2, cell2, vertex3, cell3, vertex1, cell1);
+			}
+		}
+		else if(cell3.IsWalled)
+		{
+			AddWallSegment(vertex3, cell3, vertex1, cell1, vertex2, cell2);
+		}
+	}
+
 	void AddWallSegment(Vector3 closeLeftVertex, Vector3 farLeftVertex, Vector3 closeRightVertex,
 		Vector3 farRightVertex)
 	{
-		var bottomLeftWallEdge = Vector3.Lerp(closeLeftVertex, farLeftVertex, 0.5f);
+		var centralLeftWallPoint = Vector3.Lerp(closeLeftVertex, farLeftVertex, 0.5f);
+		var centralRightWallPoint = Vector3.Lerp(closeRightVertex, farRightVertex, 0.5f);
+		
+		var leftThicknessOffset = Metrics.WallThicknessOffset(closeLeftVertex, farLeftVertex);
+		var rightThicknessOffset = Metrics.WallThicknessOffset(closeRightVertex, farRightVertex);
+
+		var bottomLeftWallEdge = centralLeftWallPoint - leftThicknessOffset;
+		var bottomRightWallEdge = centralRightWallPoint - rightThicknessOffset;
+		
 		var topLeftWallEdge = bottomLeftWallEdge;
-		topLeftWallEdge.y += Metrics.WallHeight;
-		var bottomRightWallEdge = Vector3.Lerp(closeRightVertex, farRightVertex, 0.5f);
 		var topRightWallEdge = bottomRightWallEdge;
+		
+		topLeftWallEdge.y += Metrics.WallHeight;
 		topRightWallEdge.y += Metrics.WallHeight;
 		
 		walls.AddQuad(bottomLeftWallEdge, bottomRightWallEdge, topLeftWallEdge, topRightWallEdge);
+
+		var topLeftEdge = topLeftWallEdge;
+		var topRightEdge = topRightWallEdge;
+		
+		bottomLeftWallEdge = topLeftWallEdge = centralLeftWallPoint + leftThicknessOffset;
+		bottomRightWallEdge = topRightWallEdge = centralRightWallPoint + rightThicknessOffset;
+		
+		topLeftWallEdge.y += Metrics.WallHeight;
+		topRightWallEdge.y += Metrics.WallHeight;
+		
 		walls.AddQuad(bottomRightWallEdge, bottomLeftWallEdge, topRightWallEdge, topLeftWallEdge);
+		
+		walls.AddQuad(topLeftEdge, topRightEdge, topLeftWallEdge, topRightWallEdge);
+	}
+
+	void AddWallSegment(Vector3 pivotVertex, Cell pivotCell, Vector3 leftVertex, Cell leftCell, Vector3 rightVertex,
+		Cell rightCell)
+	{
+		AddWallSegment(pivotVertex, leftVertex, pivotVertex, rightVertex);
 	}
 
 	GameObject PickHousePrefab(int urbanizationLevel, float hash, float choice)
