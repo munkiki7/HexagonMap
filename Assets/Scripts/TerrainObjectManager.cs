@@ -77,7 +77,10 @@ public class TerrainObjectManager : MonoBehaviour
 	{
 		if (closeCell.IsWalled != farCell.IsWalled)
 		{
-			AddWallSegment(closeEdges.vertex1, farEdges.vertex1, closeEdges.vertex5, farEdges.vertex5);
+			AddWallSegment(closeEdges.vertex1, farEdges.vertex1, closeEdges.vertex2, farEdges.vertex2);
+			AddWallSegment(closeEdges.vertex2, farEdges.vertex2, closeEdges.vertex3, farEdges.vertex3);
+			AddWallSegment(closeEdges.vertex3, farEdges.vertex3, closeEdges.vertex4, farEdges.vertex4);
+			AddWallSegment(closeEdges.vertex4, farEdges.vertex4, closeEdges.vertex5, farEdges.vertex5);
 		}
 	}
 
@@ -121,8 +124,13 @@ public class TerrainObjectManager : MonoBehaviour
 	void AddWallSegment(Vector3 closeLeftVertex, Vector3 farLeftVertex, Vector3 closeRightVertex,
 		Vector3 farRightVertex)
 	{
-		var centralLeftWallPoint = Vector3.Lerp(closeLeftVertex, farLeftVertex, 0.5f);
-		var centralRightWallPoint = Vector3.Lerp(closeRightVertex, farRightVertex, 0.5f);
+		closeLeftVertex = Metrics.Perturb(closeLeftVertex);
+		closeRightVertex = Metrics.Perturb(closeRightVertex);
+		farLeftVertex = Metrics.Perturb(farLeftVertex);
+		farRightVertex = Metrics.Perturb(farRightVertex);
+		
+		var centralLeftWallPoint = Metrics.WallLerp(closeLeftVertex, farLeftVertex);
+		var centralRightWallPoint = Metrics.WallLerp(closeRightVertex, farRightVertex);
 		
 		var leftThicknessOffset = Metrics.WallThicknessOffset(closeLeftVertex, farLeftVertex);
 		var rightThicknessOffset = Metrics.WallThicknessOffset(closeRightVertex, farRightVertex);
@@ -136,7 +144,7 @@ public class TerrainObjectManager : MonoBehaviour
 		topLeftWallEdge.y += Metrics.WallHeight;
 		topRightWallEdge.y += Metrics.WallHeight;
 		
-		walls.AddQuad(bottomLeftWallEdge, bottomRightWallEdge, topLeftWallEdge, topRightWallEdge);
+		walls.AddQuadUnperturbed(bottomLeftWallEdge, bottomRightWallEdge, topLeftWallEdge, topRightWallEdge);
 
 		var topLeftEdge = topLeftWallEdge;
 		var topRightEdge = topRightWallEdge;
@@ -147,9 +155,9 @@ public class TerrainObjectManager : MonoBehaviour
 		topLeftWallEdge.y += Metrics.WallHeight;
 		topRightWallEdge.y += Metrics.WallHeight;
 		
-		walls.AddQuad(bottomRightWallEdge, bottomLeftWallEdge, topRightWallEdge, topLeftWallEdge);
+		walls.AddQuadUnperturbed(bottomRightWallEdge, bottomLeftWallEdge, topRightWallEdge, topLeftWallEdge);
 		
-		walls.AddQuad(topLeftEdge, topRightEdge, topLeftWallEdge, topRightWallEdge);
+		walls.AddQuadUnperturbed(topLeftEdge, topRightEdge, topLeftWallEdge, topRightWallEdge);
 	}
 
 	void AddWallSegment(Vector3 pivotVertex, Cell pivotCell, Vector3 leftVertex, Cell leftCell, Vector3 rightVertex,

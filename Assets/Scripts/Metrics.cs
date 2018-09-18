@@ -33,6 +33,7 @@ public static class Metrics
 	public const float HashGridScale = 0.25f;
 	public const float WallHeight = 3f;
 	public const float WallThickness = 0.75f;
+	public const float WallElevationOffset = TerraceVerticalStepSize;
 
 	static readonly Vector3[] Corners = 
 	{
@@ -185,5 +186,13 @@ public static class Metrics
 		offset.y = 0;
 		offset.z = farEdge.z - closeEdge.z;
 		return offset.normalized * (WallThickness * 0.5f);
+	}
+
+	public static Vector3 WallLerp(Vector3 closeVertex, Vector3 farVertex)
+	{
+		var middle = Vector3.Lerp(closeVertex, farVertex, 0.5f);
+		var factor = closeVertex.y < farVertex.y ? WallElevationOffset : 1f - WallElevationOffset;
+		middle.y = Mathf.Lerp(closeVertex.y, farVertex.y, factor);
+		return middle;
 	}
 }
