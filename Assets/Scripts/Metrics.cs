@@ -31,9 +31,11 @@ public static class Metrics
 	//Object generation
 	public const int HashGridSize = 256;
 	public const float HashGridScale = 0.25f;
-	public const float WallHeight = 3f;
+	public const float WallHeight = 4f;
 	public const float WallThickness = 0.75f;
 	public const float WallElevationOffset = TerraceVerticalStepSize;
+	public const float TowerExistenceProbability = 0.5f;
+	public const float WallYOffset = -1f;
 
 	static readonly Vector3[] Corners = 
 	{
@@ -192,7 +194,7 @@ public static class Metrics
 	{
 		var middle = Vector3.Lerp(closeVertex, farVertex, 0.5f);
 		var factor = closeVertex.y < farVertex.y ? WallElevationOffset : 1f - WallElevationOffset;
-		middle.y = Mathf.Lerp(closeVertex.y, farVertex.y, factor);
+		middle.y = Mathf.Lerp(closeVertex.y, farVertex.y, factor) + WallYOffset;
 		return middle;
 	}
 }

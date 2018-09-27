@@ -700,6 +700,10 @@ MonoBehaviour:
     - {fileID: 1074157738377024, guid: f5a36f9a8c731394ca5553417395d181, type: 2}
     - {fileID: 1815757589980664, guid: 900655829f1841240b8c95db40f368aa, type: 2}
   walls: {fileID: 114480255015838106}
+  towerPrefab: {fileID: 1982759043098514, guid: 79c13f905682d764aade20f4874b631a,
+    type: 2}
+  bridgePrefab: {fileID: 1735211349415090, guid: 110e7587ac8306d4ab6b9bf48addfec5,
+    type: 2}
 --- !u!114 &114442757776344246
 MonoBehaviour:
   m_ObjectHideFlags: 1

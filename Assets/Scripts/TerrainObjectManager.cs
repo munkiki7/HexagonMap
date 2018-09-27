@@ -10,6 +10,8 @@ public class TerrainObjectManager : MonoBehaviour
 
 	GameObject _pickedHousePrefab;
 
+	public GameObject towerPrefab, bridgePrefab;
+
 	Transform _objectContainer;
 	
 	public void Clear()
@@ -131,8 +133,20 @@ public class TerrainObjectManager : MonoBehaviour
 		}
 	}
 
+	public void AddBridge(Vector3 road1Center, Vector3 road2Center)
+	{
+		road1Center = Metrics.Perturb(road1Center);
+		road2Center = Metrics.Perturb(road2Center);
+		
+		bridgePrefab = Instantiate(bridgePrefab);
+		bridgePrefab.transform.localPosition = (road1Center + road2Center) / 2;
+		bridgePrefab.transform.localPosition += new Vector3(-1.275f, -0.539f, -2.32f);
+		bridgePrefab.transform.right = road1Center - road2Center;
+		bridgePrefab.transform.SetParent(_objectContainer, false);
+	}
+
 	void AddWallSegment(Vector3 closeLeftVertex, Vector3 farLeftVertex, Vector3 closeRightVertex,
-		Vector3 farRightVertex)
+		Vector3 farRightVertex, bool addTower = false)
 	{
 		closeLeftVertex = Metrics.Perturb(closeLeftVertex);
 		closeRightVertex = Metrics.Perturb(closeRightVertex);
@@ -168,6 +182,23 @@ public class TerrainObjectManager : MonoBehaviour
 		walls.AddQuadUnperturbed(bottomRightWallEdge, bottomLeftWallEdge, topRightWallEdge, topLeftWallEdge);
 		
 		walls.AddQuadUnperturbed(topLeftEdge, topRightEdge, topLeftWallEdge, topRightWallEdge);
+
+		if (addTower)
+		{
+			AddTower(bottomLeftWallEdge, bottomRightWallEdge);
+		}
+	}
+
+	void AddTower(Vector3 leftWallPoint, Vector3 rightWallPoint)
+	{
+		var tower = Instantiate(towerPrefab);
+		tower.transform.localPosition = (leftWallPoint + rightWallPoint) / 2f;
+
+		var rightDirection = leftWallPoint - rightWallPoint;
+		rightDirection.y = 0f;
+		tower.transform.right = rightDirection;
+		
+		tower.transform.SetParent(_objectContainer, false);
 	}
 
 	void AddWallSegment(Vector3 pivotVertex, Cell pivotCell, Vector3 leftVertex, Cell leftCell, Vector3 rightVertex,
@@ -185,7 +216,13 @@ public class TerrainObjectManager : MonoBehaviour
 		{
 			if (hasRightWall)
 			{
-				AddWallSegment(pivotVertex, leftVertex, pivotVertex, rightVertex);
+				var hasTower = false;
+				if (leftCell.Elevation == rightCell.Elevation)
+				{
+					var probability = Metrics.SampleHashGrid((pivotVertex + leftVertex + rightVertex) / 3f);
+					hasTower = probability.existingChance < Metrics.TowerExistenceProbability;
+				}
+				AddWallSegment(pivotVertex, leftVertex, pivotVertex, rightVertex, hasTower);
 			}
 			else if (leftCell.Elevation < rightCell.Elevation)
 			{

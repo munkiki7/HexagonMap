@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: c451fba9fe6ba1b46bee3665bb72641a
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Tower_Boole_ghost_Cubo
+    100004: Tower_Boole_ghost_Cubo_1
+    100006: Tower_Boole_ghost_Cubo_10
+    100008: Tower_Boole_ghost_Cubo_2
+    100010: Tower_Boole_ghost_Cubo_3
+    100012: Tower_Boole_ghost_Cubo_4
+    100014: Tower_Boole_ghost_Cubo_5
+    100016: Tower_Boole_ghost_Cubo_6
+    100018: Tower_Boole_ghost_Cubo_7
+    100020: Tower_Boole_ghost_Cubo_8
+    100022: Tower_Boole_ghost_Cubo_9
+    100024: Tower_Boole_Tubo_2
+    100026: Tower_Cilindro
+    100028: Tower_Cilindro_1
+    100030: Tower_Tube
+    100032: Tower_Tubo_1
+    400000: //RootNode
+    400002: Tower_Boole_ghost_Cubo
+    400004: Tower_Boole_ghost_Cubo_1
+    400006: Tower_Boole_ghost_Cubo_10
+    400008: Tower_Boole_ghost_Cubo_2
+    400010: Tower_Boole_ghost_Cubo_3
+    400012: Tower_Boole_ghost_Cubo_4
+    400014: Tower_Boole_ghost_Cubo_5
+    400016: Tower_Boole_ghost_Cubo_6
+    400018: Tower_Boole_ghost_Cubo_7
+    400020: Tower_Boole_ghost_Cubo_8
+    400022: Tower_Boole_ghost_Cubo_9
+    400024: Tower_Boole_Tubo_2
+    400026: Tower_Cilindro
+    400028: Tower_Cilindro_1
+    400030: Tower_Tube
+    400032: Tower_Tubo_1
+    2100000: Tower_Boole_ghost_CuboMat
+    2100002: Tower_Boole_ghost_Cubo_1Mat
+    2100004: Tower_Boole_ghost_Cubo_10Mat
+    2100006: Tower_Boole_ghost_Cubo_2Mat
+    2100008: Tower_Boole_ghost_Cubo_3Mat
+    2100010: Tower_Boole_ghost_Cubo_4Mat
+    2100012: Tower_Boole_ghost_Cubo_5Mat
+    2100014: Tower_Boole_ghost_Cubo_6Mat
+    2100016: Tower_Boole_ghost_Cubo_7Mat
+    2100018: Tower_Boole_ghost_Cubo_8Mat
+    2100020: Tower_Boole_ghost_Cubo_9Mat
+    2100022: Tower_Boole_Tubo_2Mat
+    2100024: Tower_CilindroMat
+    2100026: Tower_Cilindro_1Mat
+    2100028: Tower_TubeMat
+    2100030: Tower_Tubo_1Mat
+    2300000: Tower_Boole_ghost_Cubo
+    2300002: Tower_Boole_ghost_Cubo_1
+    2300004: Tower_Boole_ghost_Cubo_10
+    2300006: Tower_Boole_ghost_Cubo_2
+    2300008: Tower_Boole_ghost_Cubo_3
+    2300010: Tower_Boole_ghost_Cubo_4
+    2300012: Tower_Boole_ghost_Cubo_5
+    2300014: Tower_Boole_ghost_Cubo_6
+    2300016: Tower_Boole_ghost_Cubo_7
+    2300018: Tower_Boole_ghost_Cubo_8
+    2300020: Tower_Boole_ghost_Cubo_9
+    2300022: Tower_Boole_Tubo_2
+    2300024: Tower_Cilindro
+    2300026: Tower_Cilindro_1
+    2300028: Tower_Tube
+    2300030: Tower_Tubo_1
+    3300000: Tower_Boole_ghost_Cubo
+    3300002: Tower_Boole_ghost_Cubo_1
+    3300004: Tower_Boole_ghost_Cubo_10
+    3300006: Tower_Boole_ghost_Cubo_2
+    3300008: Tower_Boole_ghost_Cubo_3
+    3300010: Tower_Boole_ghost_Cubo_4
+    3300012: Tower_Boole_ghost_Cubo_5
+    3300014: Tower_Boole_ghost_Cubo_6
+    3300016: Tower_Boole_ghost_Cubo_7
+    3300018: Tower_Boole_ghost_Cubo_8
+    3300020: Tower_Boole_ghost_Cubo_9
+    3300022: Tower_Boole_Tubo_2
+    3300024: Tower_Cilindro
+    3300026: Tower_Cilindro_1
+    3300028: Tower_Tube
+    3300030: Tower_Tubo_1
+    4300000: Tower_Boole_ghost_Cubo
+    4300002: Tower_Boole_ghost_Cubo_1
+    4300004: Tower_Boole_ghost_Cubo_10
+    4300006: Tower_Boole_ghost_Cubo_2
+    4300008: Tower_Boole_ghost_Cubo_3
+    4300010: Tower_Boole_ghost_Cubo_4
+    4300012: Tower_Boole_ghost_Cubo_5
+    4300014: Tower_Boole_ghost_Cubo_6
+    4300016: Tower_Boole_ghost_Cubo_7
+    4300018: Tower_Boole_ghost_Cubo_8
+    4300020: Tower_Boole_ghost_Cubo_9
+    4300022: Tower_Boole_Tubo_2
+    4300024: Tower_Cilindro
+    4300026: Tower_Cilindro_1
+    4300028: Tower_Tube
+    4300030: Tower_Tubo_1
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 0
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

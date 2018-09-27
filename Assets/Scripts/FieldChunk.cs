@@ -642,6 +642,10 @@ public class FieldChunk : MonoBehaviour
 			}
 
 			roadCenter += corner * 0.5f;
+			if (cell.IncomingRiverDirection == direction.Next() && (cell.HasRoadAtDirection(direction.AfterNext()) || cell.HasRoadAtDirection(direction.Opposite())))
+			{
+				objectManager.AddBridge(roadCenter, center - corner * 0.5f);
+			}
 			center += corner * 0.25f;
 		}
 		else if (cell.IncomingRiverDirection == cell.OutGoingRiverDirection.Previous())
