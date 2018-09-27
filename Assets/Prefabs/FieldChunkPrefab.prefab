@@ -702,7 +702,9 @@ MonoBehaviour:
   walls: {fileID: 114480255015838106}
   towerPrefab: {fileID: 1982759043098514, guid: 79c13f905682d764aade20f4874b631a,
     type: 2}
-  bridgePrefab: {fileID: 1735211349415090, guid: 110e7587ac8306d4ab6b9bf48addfec5,
+  bridgePrefab: {fileID: 1258601139607352, guid: 110e7587ac8306d4ab6b9bf48addfec5,
+    type: 2}
+  castlePrefab: {fileID: 1858076369560700, guid: c11c8520627f98940a45118f198998c2,
     type: 2}
 --- !u!114 &114442757776344246
 MonoBehaviour:

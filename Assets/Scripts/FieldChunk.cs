@@ -75,6 +75,10 @@ public class FieldChunk : MonoBehaviour
 		{
 			objectManager.AddObjects(cell.Position, cell);
 		}
+		if (cell.isSpecial)
+		{
+			objectManager.AddCastle(cell, cell.Position);
+		}
 	}
 
 	void Triangulate(Direction direction, Cell cell)
@@ -644,7 +648,7 @@ public class FieldChunk : MonoBehaviour
 			roadCenter += corner * 0.5f;
 			if (cell.IncomingRiverDirection == direction.Next() && (cell.HasRoadAtDirection(direction.AfterNext()) || cell.HasRoadAtDirection(direction.Opposite())))
 			{
-				objectManager.AddBridge(roadCenter, center - corner * 0.5f);
+				objectManager.AddBridgeStraightRiver(roadCenter, center - corner * 0.5f);
 			}
 			center += corner * 0.25f;
 		}
@@ -688,7 +692,12 @@ public class FieldChunk : MonoBehaviour
 				return;
 			}
 
-			roadCenter += Metrics.GetMiddleSolidCorner(middleDirection) * 0.25f;
+			var offset = Metrics.GetMiddleSolidCorner(middleDirection);
+			roadCenter += offset * 0.25f;
+			if (direction == middleDirection && cell.HasRoadAtDirection(direction.Opposite()))
+			{
+				objectManager.AddBridgeCurvedRiver(roadCenter, center - offset * Metrics.InnerToOuter * 0.7f);
+			}
 		}
 		
 		

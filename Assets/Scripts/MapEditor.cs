@@ -25,6 +25,8 @@ public class MapEditor : MonoBehaviour
 	bool _applyWaterLevel = true;
 
 	bool _applyUrbanizationLevel = true;
+
+	bool _applySpecialCell;
 	
 	enum EditMode
 	{Ignore = 0, Create = 1, Delete = 2}
@@ -117,6 +119,11 @@ public class MapEditor : MonoBehaviour
 		if (_applyWaterLevel)
 		{
 			cell.WaterLevel = _activeWaterLevel;
+		}
+
+		if (_applySpecialCell)
+		{
+			cell.isSpecial = true;
 		}
 
 		if (_applyUrbanizationLevel)
@@ -239,4 +246,11 @@ public class MapEditor : MonoBehaviour
 	{
 		_editWallMode = (EditMode) mode;
 	}
+	
+	[UsedImplicitly]
+	public void SetApplySpecialCell(bool toggle)
+	{
+		_applySpecialCell = toggle;
+	}
+
 }

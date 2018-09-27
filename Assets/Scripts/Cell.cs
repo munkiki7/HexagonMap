@@ -74,6 +74,8 @@ public class Cell : MonoBehaviour
 		}
 	}
 
+	public bool isSpecial;
+
 	public bool IsUnderWater
 	{
 		get { return _waterLevel > _elevation; }

@@ -10,7 +10,7 @@ public class TerrainObjectManager : MonoBehaviour
 
 	GameObject _pickedHousePrefab;
 
-	public GameObject towerPrefab, bridgePrefab;
+	public GameObject towerPrefab, bridgePrefab, castlePrefab;
 
 	Transform _objectContainer;
 	
@@ -57,7 +57,7 @@ public class TerrainObjectManager : MonoBehaviour
 			position.y += 2;
 		}
 		tree.transform.localPosition = Metrics.Perturb(position);
-		tree.transform.localRotation = Quaternion.Euler(0f, 360f * hash.houseRotation, 0f);
+		tree.transform.localRotation = Quaternion.Euler(0f, 360f * hash.rotation, 0f);
 		tree.transform.SetParent(_objectContainer, false);
 	}
 
@@ -71,7 +71,7 @@ public class TerrainObjectManager : MonoBehaviour
 		var house = Instantiate(prefab);
 		position.y += house.transform.localScale.y * 0.5f;
 		house.transform.localPosition = Metrics.Perturb(position);
-		house.transform.localRotation = Quaternion.Euler(0f, 360f * hash.houseRotation, 0f);
+		house.transform.localRotation = Quaternion.Euler(0f, 360f * hash.rotation, 0f);
 		house.transform.SetParent(_objectContainer, false);
 	}
 
@@ -133,7 +133,7 @@ public class TerrainObjectManager : MonoBehaviour
 		}
 	}
 
-	public void AddBridge(Vector3 road1Center, Vector3 road2Center)
+	public void AddBridgeStraightRiver(Vector3 road1Center, Vector3 road2Center)
 	{
 		road1Center = Metrics.Perturb(road1Center);
 		road2Center = Metrics.Perturb(road2Center);
@@ -143,6 +143,27 @@ public class TerrainObjectManager : MonoBehaviour
 		bridgePrefab.transform.localPosition += new Vector3(-1.275f, -0.539f, -2.32f);
 		bridgePrefab.transform.right = road1Center - road2Center;
 		bridgePrefab.transform.SetParent(_objectContainer, false);
+	}
+	
+	public void AddBridgeCurvedRiver(Vector3 road1Center, Vector3 road2Center)
+	{
+		road1Center = Metrics.Perturb(road1Center);
+		road2Center = Metrics.Perturb(road2Center);
+		
+		bridgePrefab = Instantiate(bridgePrefab);
+		bridgePrefab.transform.localPosition = (road1Center + road2Center) / 2;
+		bridgePrefab.transform.right = road1Center - road2Center;
+		var length = Vector3.Distance(road1Center, road2Center);
+		bridgePrefab.transform.localScale = new Vector3(1, 1, length / 7f);
+		bridgePrefab.transform.SetParent(_objectContainer, false);
+	}
+
+	public void AddCastle(Cell cell, Vector3 position)
+	{
+		var castle = Instantiate(castlePrefab);
+		castle.transform.localPosition = Metrics.Perturb(position);
+		castle.transform.localRotation = Quaternion.Euler(270f, 360f * Metrics.SampleHashGrid(position).rotation, 0f);
+		castle.transform.SetParent(_objectContainer, false);
 	}
 
 	void AddWallSegment(Vector3 closeLeftVertex, Vector3 farLeftVertex, Vector3 closeRightVertex,
