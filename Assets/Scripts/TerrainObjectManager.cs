@@ -73,13 +73,23 @@ public class TerrainObjectManager : MonoBehaviour
 		house.transform.SetParent(_objectContainer, false);
 	}
 
-	public void AddWall(EdgeVertices closeEdges, Cell closeCell, EdgeVertices farEdges, Cell farCell)
+	public void AddWall(EdgeVertices closeEdges, Cell closeCell, EdgeVertices farEdges, Cell farCell, bool hasRiver, bool hasRoad)
 	{
-		if (closeCell.IsWalled != farCell.IsWalled)
+		if (closeCell.IsWalled != farCell.IsWalled && 
+		    !closeCell.IsUnderWater && !farCell.IsUnderWater 
+		    && closeCell.GetEdgeType(farCell) != HexagonEdgeType.Cliff)
 		{
 			AddWallSegment(closeEdges.vertex1, farEdges.vertex1, closeEdges.vertex2, farEdges.vertex2);
-			AddWallSegment(closeEdges.vertex2, farEdges.vertex2, closeEdges.vertex3, farEdges.vertex3);
-			AddWallSegment(closeEdges.vertex3, farEdges.vertex3, closeEdges.vertex4, farEdges.vertex4);
+			if (!hasRiver && !hasRoad)
+			{
+				AddWallSegment(closeEdges.vertex2, farEdges.vertex2, closeEdges.vertex3, farEdges.vertex3);
+				AddWallSegment(closeEdges.vertex3, farEdges.vertex3, closeEdges.vertex4, farEdges.vertex4);
+			}
+			else
+			{
+				AddWallCap(closeEdges.vertex2, farEdges.vertex2);
+				AddWallCap(farEdges.vertex4, closeEdges.vertex4);
+			}
 			AddWallSegment(closeEdges.vertex4, farEdges.vertex4, closeEdges.vertex5, farEdges.vertex5);
 		}
 	}
@@ -163,7 +173,78 @@ public class TerrainObjectManager : MonoBehaviour
 	void AddWallSegment(Vector3 pivotVertex, Cell pivotCell, Vector3 leftVertex, Cell leftCell, Vector3 rightVertex,
 		Cell rightCell)
 	{
-		AddWallSegment(pivotVertex, leftVertex, pivotVertex, rightVertex);
+		if (pivotCell.IsUnderWater)
+		{
+			return;
+		}
+
+		var hasLeftWall = !leftCell.IsUnderWater && pivotCell.GetEdgeType(leftCell) != HexagonEdgeType.Cliff;
+		var hasRightWall = !rightCell.IsUnderWater && pivotCell.GetEdgeType(rightCell) != HexagonEdgeType.Cliff;
+		
+		if (hasLeftWall)
+		{
+			if (hasRightWall)
+			{
+				AddWallSegment(pivotVertex, leftVertex, pivotVertex, rightVertex);
+			}
+			else if (leftCell.Elevation < rightCell.Elevation)
+			{
+				AddWallWedge(pivotVertex, leftVertex, rightVertex);
+			}
+			else
+			{
+				AddWallCap(pivotVertex, leftVertex);
+			}
+		}
+		else if (hasRightWall)
+		{
+			if (rightCell.Elevation < leftCell.Elevation)
+			{
+				AddWallWedge(rightVertex, pivotVertex, leftVertex);
+			}
+			else
+			{
+				AddWallCap(rightVertex, pivotVertex);
+			}
+		}
+	}
+
+	void AddWallCap(Vector3 closeVertex, Vector3 farVertex)
+	{
+		closeVertex = Metrics.Perturb(closeVertex);
+		farVertex = Metrics.Perturb(farVertex);
+		var center = Metrics.WallLerp(closeVertex, farVertex);
+		var thickness = Metrics.WallThicknessOffset(closeVertex, farVertex);
+
+		Vector3 vertex3, vertex4;
+
+		var vertex1 = vertex3 = center - thickness;
+		var vertex2 = vertex4 = center + thickness;
+
+		vertex3.y = vertex4.y = center.y + Metrics.WallHeight;
+		walls.AddQuadUnperturbed(vertex1, vertex2, vertex3, vertex4);
+	}
+	
+	void AddWallWedge(Vector3 closeVertex, Vector3 farVertex, Vector3 point)
+	{
+		closeVertex = Metrics.Perturb(closeVertex);
+		farVertex = Metrics.Perturb(farVertex);
+		point = Metrics.Perturb(point);
+		
+		var center = Metrics.WallLerp(closeVertex, farVertex);
+		var thickness = Metrics.WallThicknessOffset(closeVertex, farVertex);
+
+		Vector3 vertex3, vertex4;
+		var pointTop = point;
+		point.y = center.y;
+
+		var vertex1 = vertex3 = center - thickness;
+		var vertex2 = vertex4 = center + thickness;
+
+		vertex3.y = vertex4.y = pointTop.y = center.y + Metrics.WallHeight;
+		walls.AddQuadUnperturbed(vertex1, point, vertex3, pointTop);
+		walls.AddQuadUnperturbed(point, vertex2, pointTop, vertex4);
+		walls.AddTriangleUnperturbed(pointTop, vertex3, vertex4);
 	}
 
 	GameObject PickHousePrefab(int urbanizationLevel, float hash, float choice)

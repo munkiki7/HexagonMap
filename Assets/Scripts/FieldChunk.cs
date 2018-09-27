@@ -166,7 +166,7 @@ public class FieldChunk : MonoBehaviour
 			TriangulateEdgeStrip(edges1, edges2, cell.Color, neighbour.Color, cell.HasRoadAtDirection(direction));
 		}
 		
-		objectManager.AddWall(edges1, cell, edges2, neighbour);
+		objectManager.AddWall(edges1, cell, edges2, neighbour, cell.HasRiverAtDirection(direction), cell.HasRoadAtDirection(direction));
 		//Corner triangles
 		var nextNeighbour = cell.GetNeighbour(direction.Next());
 		if (nextNeighbour != null && neighbour != null && direction <= Direction.East)
